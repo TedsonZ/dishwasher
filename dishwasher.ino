@@ -1,14 +1,22 @@
 /*********
   Rui Santos
-  Complete project details at https://RandomNerdTutorials.com/esp32-websocket-server-arduino/
+  Complete project details
+   - Arduino IDE: https://RandomNerdTutorials.com/esp32-ota-over-the-air-arduino/
+   - VS Code: https://RandomNerdTutorials.com/esp32-ota-over-the-air-vs-code/
+  
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files.
+  
   The above copyright notice and this permission notice shall be included in all
   copies or substantial portions of the Software.
 *********/
 
 // Import required libraries
+#include <Arduino.h>
 #include <WiFi.h>
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
+#include <AsyncElegantOTA.h>
 #include "pag.h"
 
 // Replace with your network credentials
@@ -72,6 +80,7 @@ String processor(const String& var){
       return "OFF";
     }
   }
+  return String();
 }
 
 void setup(){
@@ -98,11 +107,14 @@ void setup(){
     request->send_P(200, "text/html", index_html, processor);
   });
 
+  // Start ElegantOTA
+  AsyncElegantOTA.begin(&server);
   // Start server
   server.begin();
 }
 
 void loop() {
+  AsyncElegantOTA.loop();
   ws.cleanupClients();
   digitalWrite(ledPin, ledState);
 }

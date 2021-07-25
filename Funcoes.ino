@@ -65,3 +65,39 @@ void prelavar() {
     }
   }
 }
+void prelavar2() {
+  const unsigned long tempoprelavar = 360000;
+  static unsigned long tempoanterior = millis();
+  const unsigned long tempojogarfora = 10000;
+  static unsigned long tempoanteriorjogarfora = millis();
+  static bool cheio = 0;
+  static bool fimfluxo = 0;
+  static bool jogandofora = 0;
+  if (cheio == 0) {
+    if (encher() == 0 && cheio == 0) {
+      digitalWrite(motorfluxoagua, 1);
+      cheio = 1;
+      tempoanterior = millis();
+    } else if (encher() == 1 && cheio == 1 && fimfluxo == 0 && porta() == 0) {
+      digitalWrite(motorfluxoagua, 1);
+    }
+  }
+  else if (cheio == 1 && fimfluxo == 0 && porta() == 0) {
+    if (porta() == 0 && millis() - tempoanterior >= tempoprelavar) {
+      digitalWrite(motorfluxoagua, 0);
+      fimfluxo = 1;
+      tempoanteriorjogarfora = millis();
+    }
+    else if (porta() == 1 && cheio == 1 && fimfluxo == 0) {
+      tempoanterior = millis() - tempoanterior;
+    }
+  }
+  else if (cheio == 1 && fimfluxo == 1 && jogandofora == 0 && encher() == 1) {
+    digitalWrite(bomba, 1);
+    if (millis() - tempoanteriorjogarfora >= tempojogarfora) {
+      digitalWrite(bomba, 0);
+      jogandofora = 1;
+    }
+  }
+}
+void 

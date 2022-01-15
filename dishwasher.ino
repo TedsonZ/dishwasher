@@ -11,16 +11,16 @@
   copies or substantial portions of the Software.
 */
 //SAÍDAS
-#define bomba   4 //Saída - Bomba de água
-#define resistencia 2 //Saída - Resistência
-#define secante 13 //Saída - Solenóide líquido secante
-#define motorfluxoagua 18 //Saída - Motor do Fluxo de água
-#define enchimento 19 //Saída - Solenóide de enchimento.
+#define bomba   4 //Saída - Bomba de água V5
+#define resistencia 2 //Saída - Resistência V8
+#define secante 13 //Saída - Solenóide líquido secante V17
+#define motorfluxoagua 18 //Saída - Motor do Fluxo de água V22
+#define enchimento 19 //Saída - Solenóide de enchimento. V27
 //ENTRADAS
-#define sensorporta 21 //Entrada - Sensor da porta
-#define sensornvagua 22 //Entrada - Sensor de Nível água
+#define sensorporta 21 //Entrada - Sensor da porta V1
+#define sensornvagua 22 //Entrada - Sensor de Nível água V18
 #define SENSORTEMP 23 //Entrada - Sensor de Temperatura
-#define sensortempmax 32 //Entrada - Sensor de Temperatura Emergência.
+#define sensortempmax 32 //Entrada - Sensor de Temperatura Emergência. V23
 
 // Import required libraries
 #include <Arduino.h>
